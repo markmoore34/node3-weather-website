@@ -1,7 +1,4 @@
 
-// console.log(`Here in the ${__filename}`);
-console.log('Client side JS file is loaded.\nTesting the app.js file');
-
 
 
 const weatherForm   = document.querySelector('form');
