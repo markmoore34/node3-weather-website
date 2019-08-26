@@ -3,7 +3,8 @@ const request = require('request');
 
 
 const forecast = (latitude, longitude, callback) => {
-    const url = 'https://api.darksky.net/forecast/d81ebbeda105e03d8aee204b76285ba3/' + latitude +',' + longitude + '?units=si&lang=en';
+    const url = `https://api.darksky.net/forecast/d81ebbeda105e03d8aee204b76285ba3/${latitude},${longitude}?units=si&lang=en`;
+
     request({ url, json: true }, (error, {body}) => {
         //you either get an error or a response... 1 of the 2
         //the below is (basically) if there's no internet connection
@@ -14,10 +15,27 @@ const forecast = (latitude, longitude, callback) => {
         //print out the good response.
         else
         {
-            callback(undefined,`${body.daily.summary}\nIt is currently ${body.currently.temperature} degrees out. \nThere is a ${body.currently.precipProbability}% chance of rain.`)
+            console.log(body);
+            const dateSR = new Date(body.daily.data[0].sunriseTime*1000);
+            const hoursSR = dateSR.getHours();
+            // Minutes part from the timestamp
+            const minutesSR = "0" + dateSR.getMinutes();
+            // Seconds part from the timestamp
+            const secondsSR = "0" + dateSR.getSeconds();
+            const dateSS = new Date(body.daily.data[0].sunsetTime*1000);
+            const hoursSS = dateSS.getHours();
+            // Minutes part from the timestamp
+            const minutesSS = "0" + dateSS.getMinutes();
+            // Seconds part from the timestamp
+            const secondsSS = "0" + dateSS.getSeconds();
+            callback(undefined,`${body.daily.summary}\n
+                                It is currently ${body.currently.temperature} degrees out. \n
+                                There is a ${body.currently.precipProbability}% chance of rain. \n
+                                The sunrise was at ${hoursSR}:${minutesSR}:${secondsSR} and sunset will be at ${hoursSS}:${minutesSS}:${secondsSS}.`)
         }
-    })
+    });
 }
+
 
 
 module.exports = forecast;
