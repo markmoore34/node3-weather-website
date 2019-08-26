@@ -106,7 +106,7 @@ app.get('*', (req,res) => {
         title: '404',
         name:'Mark Moore',
         paragraph: '404 - Page not found'
-    });
+    })
 });
 
 app.listen(port, () => {
