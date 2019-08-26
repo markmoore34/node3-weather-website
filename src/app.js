@@ -29,7 +29,6 @@ app.set('views', viewsPath);//this MUST be after the 'view engine' set above.
 hbs.registerPartials(partialsPath);
 
 /********** this sets up the static directory to server.***********/
-// this sets up the default starting path for every 'app.get' request.
 //so you don't need 'app.get' functions to simply display the pages
 app.use(express.static(publicDirPath));
 
