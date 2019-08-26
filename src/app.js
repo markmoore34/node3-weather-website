@@ -1,16 +1,16 @@
-const geocode = require('./utils/geocode');
-const forecast = require('./utils/forecast');
-
 const path = require('path');
 //import the express function
 const express = require('express');
 const hbs = require('hbs');
 
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
+
 //create a variable to contain the express function. 
 //This will enable server configuring
 //allows to set up the routes!!!!! 'app.get' 'app.put'
 const app = express();
-
+const port = process.env.PORT || 3000;
 
 /********** these 2 are express configure commands.***********/
 // console.log(__dirname);
@@ -109,6 +109,6 @@ app.get('*', (req,res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000');
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`);
 });
