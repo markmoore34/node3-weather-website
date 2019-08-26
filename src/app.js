@@ -33,7 +33,7 @@ hbs.registerPartials(partialsPath);
 app.use(express.static(publicDirPath));
 
 // '' means the home page.
-app.get('', (req, res) => {
+app.get('/', (req, res) => {
     res.render('index', {
         title: 'Weather App',
         name: 'Mark Moore'
