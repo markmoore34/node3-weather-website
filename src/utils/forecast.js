@@ -15,23 +15,27 @@ const forecast = (latitude, longitude, callback) => {
         //print out the good response.
         else
         {
-            console.log(body);
+            // console.log(body);
             const dateSR = new Date(body.daily.data[0].sunriseTime*1000);
             const hoursSR = dateSR.getHours();
             // Minutes part from the timestamp
             const minutesSR = "0" + dateSR.getMinutes();
             // Seconds part from the timestamp
             const secondsSR = "0" + dateSR.getSeconds();
+            const formattedTimeSR = hoursSR + ':' + minutesSR.substr(-2) + ':' + secondsSR.substr(-2);
+
             const dateSS = new Date(body.daily.data[0].sunsetTime*1000);
             const hoursSS = dateSS.getHours();
             // Minutes part from the timestamp
             const minutesSS = "0" + dateSS.getMinutes();
             // Seconds part from the timestamp
             const secondsSS = "0" + dateSS.getSeconds();
+            const formattedTimeSS = hoursSS + ':' + minutesSS.substr(-2) + ':' + secondsSS.substr(-2);
+
             callback(undefined,`${body.daily.summary}\n
                                 It is currently ${body.currently.temperature} degrees out. \n
                                 There is a ${body.currently.precipProbability}% chance of rain. \n
-                                The sunrise was at ${hoursSR}:${minutesSR}:${secondsSR} and sunset will be at ${hoursSS}:${minutesSS}:${secondsSS}.`)
+                                The sunrise was at ${formattedTimeSR} and sunset will be at ${formattedTimeSS}.`)
         }
     });
 }
